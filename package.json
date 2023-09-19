@@ -9,12 +9,22 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
-    "prettier": "npx prettier --write .",
+    "format": "npx prettier --write .",
     "storybook": "ng run clinical-trial-app:storybook",
     "build-storybook": "ng run clinical-trial-app:build-storybook",
-    "cypress:open": "cypress open"
-
+    "cypress:open": "cypress open",
+    "prettier:check": "prettier --config .prettierrc --check \"src/**/*.{ts,css,html}\"",
   },
+   "lint-staged": {
+      "src/**/*.{ts,css,html}": [
+          "npm run prettier:check"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"       
+       }
+    },    
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.0",
