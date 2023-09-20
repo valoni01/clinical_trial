@@ -1,0 +1,12 @@
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{ trialName }} </mat-panel-title>
+      <mat-panel-description>
+        {{ trialDescription }}
+        <mat-icon (click)="$event.stopPropagation()">stars</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    {{ trialDetails }}
+  </mat-expansion-panel>
+</mat-accordion>
