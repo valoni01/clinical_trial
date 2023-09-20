@@ -17,7 +17,8 @@
   },
   "lint-staged": {
     "src/**/*.{ts,css,html}": [
-      "npm run prettier:check"
+      "npm run prettier:check", 
+      "npm run lint:fix"
     ]
   },
   "husky": {
