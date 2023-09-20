@@ -13,7 +13,7 @@
     "storybook": "ng run clinical-trial-app:storybook",
     "build-storybook": "ng run clinical-trial-app:build-storybook",
     "cypress:open": "cypress open",
-    "prettier:check": "prettier --config .prettierrc --check \"src/**/*.{ts,css,html}\""
+    "prettier:check": "prettier --config .prettierrc.json --check \"src/**/*.{ts,css,html}\""
   },
   "lint-staged": {
     "src/**/*.{ts,css,html}": [
