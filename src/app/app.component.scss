@@ -8,7 +8,7 @@
 }
 
 .example-headers-align .mat-expansion-panel-header-description {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -20,6 +20,6 @@
 
 mat-expansion-panel {
   margin-bottom: 20px;
-  width:50%;
-  background-color:  rgb(129, 154, 129);
+  width: 50%;
+  background-color: rgb(129, 154, 129);
 }

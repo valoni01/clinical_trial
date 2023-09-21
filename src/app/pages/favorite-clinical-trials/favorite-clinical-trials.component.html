@@ -1,1 +1,10 @@
-<p>favorite-clinical-trials works!</p>
+<div
+  *ngFor="let trial of favoriteClinicalTrials$ | async"
+  style="margin-bottom: 10px">
+  <app-clinical-trial-list-item
+    [trialName]="trial.nctId"
+    [trialDescription]="trial.briefTitle"
+    [trialDetails]="trial.officialTitle"
+    (onFavoriteUpdate)="updateFavorite(trial)">
+  </app-clinical-trial-list-item>
+</div>

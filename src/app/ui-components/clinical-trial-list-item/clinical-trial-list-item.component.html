@@ -4,7 +4,9 @@
       <mat-panel-title> {{ trialName }} </mat-panel-title>
       <mat-panel-description>
         {{ trialDescription }}
-        <mat-icon (click)="$event.stopPropagation()">stars</mat-icon>
+        <mat-icon (click)="updateFavorite(); $event.stopPropagation()"
+          >stars</mat-icon
+        >
       </mat-panel-description>
     </mat-expansion-panel-header>
     {{ trialDetails }}
