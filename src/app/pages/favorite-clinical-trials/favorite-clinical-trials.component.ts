@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClinicalStore } from 'src/app/clinical.store';
+import { ClinicalStore } from 'src/app/services/clinical.store';
 import { ClinicalTrialListItemComponent } from 'src/app/ui-components/clinical-trial-list-item/clinical-trial-list-item.component';
 
 @Component({
@@ -8,7 +8,6 @@ import { ClinicalTrialListItemComponent } from 'src/app/ui-components/clinical-t
   standalone: true,
   imports: [CommonModule, ClinicalTrialListItemComponent],
   templateUrl: './favorite-clinical-trials.component.html',
-  styleUrls: ['./favorite-clinical-trials.component.scss'],
 })
 export class FavoriteClinicalTrialsComponent {
   private store = inject(ClinicalStore);

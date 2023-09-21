@@ -1,8 +1,18 @@
-<div *ngFor="let trial of clinicalTrials$ | async" style="margin-bottom: 10px">
+<h2>Available Trials</h2>
+
+<div *ngFor="let trial of clinicalTrials$ | async; trackBy: trialByID">
   <app-clinical-trial-list-item
     [trialName]="trial.nctId"
     [trialDescription]="trial.briefTitle"
     [trialDetails]="trial.officialTitle"
+    [isFavorite]="trial.isFavorite"
     (onFavoriteUpdate)="updateFavorite(trial)">
   </app-clinical-trial-list-item>
 </div>
+
+<span
+  ><mat-slide-toggle
+    (change)="setAutoFetchData($event)"
+    [(ngModel)]="isActive"></mat-slide-toggle>
+  Reload every 5 sec.</span
+>

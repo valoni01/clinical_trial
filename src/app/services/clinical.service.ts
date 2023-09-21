@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, flatMap, map } from 'rxjs';
-import { ClinicalTrialModel } from 'src/app/clinical-trial.model';
+import { ClinicalTrialModel } from 'src/app/services/clinical-trial.model';
 
 @Injectable({
   providedIn: 'root',

@@ -9,11 +9,13 @@ import {
   tap,
   Observable,
   take,
+  interval,
 } from 'rxjs';
+import { ClinicalTrialHelper } from 'src/app/services/clinical-trial.helper';
 import {
   AppClinicalTrialState,
   ClinicalTrialModel,
-} from 'src/app/clinical-trial.model';
+} from 'src/app/services/clinical-trial.model';
 
 export const defaultState: AppClinicalTrialState = {
   clinicalTrials: [],
@@ -22,6 +24,7 @@ export const defaultState: AppClinicalTrialState = {
 @Injectable({ providedIn: 'root' })
 export class ClinicalStore extends ComponentStore<AppClinicalTrialState> {
   private clinicalService = inject(ClinicalService);
+  private clinicalTrialHelper = inject(ClinicalTrialHelper);
 
   constructor() {
     super(defaultState);
@@ -39,34 +42,44 @@ export class ClinicalStore extends ComponentStore<AppClinicalTrialState> {
       .pipe(
         take(1),
         tap(trials => {
-          const isClinicalTrialFavorite = trials.some(({ nctId }) => {
-            trial.nctId === nctId;
-          });
-          if (isClinicalTrialFavorite) {
-            this.removeFavoriteClinicalTrial(trials, trial);
-          } else this.setFavoriteClinicalTrial(trial);
+          const favoriteTrials =
+            this.clinicalTrialHelper.upsertClinicalTrialFavoriteProperty(
+              trials,
+              trial
+            );
+          if (favoriteTrials.length === 10) {
+            throw new Error('You can only have 10 favorite trials');
+          }
+          this.updateClinicalTrialFavoriteFlag(trial);
+          this.updateFavoriteClinicalTrials(favoriteTrials);
         })
       )
       .subscribe();
   }
 
-  private readonly setFavoriteClinicalTrial = this.updater(
-    (
-      state,
-      favoriteClinicalTrial: ClinicalTrialModel
-    ): AppClinicalTrialState => {
-      return {
-        ...state,
-        favoriteClinicalTrial: [
-          ...state.favoriteClinicalTrial,
-          favoriteClinicalTrial,
-        ],
-      };
-    }
-  );
+  public updateClinicalTrialFavoriteFlag(trial: ClinicalTrialModel) {
+    this.getClinicalTrials$
+      .pipe(
+        take(1),
+        tap(trials => {
+          const clinicalTrials = this.clinicalTrialHelper.updateClinicalTrials(
+            trials,
+            trial
+          );
+          this.updateClinicalTrials(clinicalTrials);
+        })
+      )
+      .subscribe();
+  }
 
-  public updateClinicalTrial(clinicalTrials: ClinicalTrialModel[]) {
+  public updateClinicalTrials(clinicalTrials: ClinicalTrialModel[]) {
     this.patchState({ clinicalTrials });
+  }
+
+  public updateFavoriteClinicalTrials(
+    favoriteClinicalTrial: ClinicalTrialModel[]
+  ) {
+    this.patchState({ favoriteClinicalTrial });
   }
 
   private removeFavoriteClinicalTrial(
@@ -80,13 +93,13 @@ export class ClinicalStore extends ComponentStore<AppClinicalTrialState> {
     this.patchState({ favoriteClinicalTrial });
   }
 
-  public readonly fetchClinicalTrials = this.effect<void>(
+  private readonly fetchClinicalTrials = this.effect<void>(
     pipe(
       switchMap(() =>
         this.clinicalService.getClinicalTrials().pipe(
           tapResponse(
             response => {
-              this.updateClinicalTrial(response);
+              this.updateClinicalTrials(response);
             },
             (e: string) => console.log(e)
           ),
@@ -95,4 +108,14 @@ export class ClinicalStore extends ComponentStore<AppClinicalTrialState> {
       )
     )
   );
+
+  public fetchClinicalTrialLogic(isAutomaticFetch = false) {
+    this.fetchClinicalTrials();
+
+    //(TODO) Autofetch logic is not working as expected. Need to fix it.
+
+    // let autoFetch = interval(5000).pipe(takeUntil(of(!isAutomaticFetch))).subscribe(_ => {
+    //   this.fetchClinicalTrials();
+    // });
+  }
 }

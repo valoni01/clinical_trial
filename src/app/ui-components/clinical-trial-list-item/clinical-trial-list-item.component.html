@@ -1,14 +1,18 @@
-<mat-accordion class="example-headers-align" multi>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title> {{ trialName }} </mat-panel-title>
-      <mat-panel-description>
-        {{ trialDescription }}
-        <mat-icon (click)="updateFavorite(); $event.stopPropagation()"
-          >stars</mat-icon
-        >
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    {{ trialDetails }}
-  </mat-expansion-panel>
-</mat-accordion>
+<div class="clinical-list">
+  <mat-accordion class="clinical-list__items">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ trialName }} </mat-panel-title>
+        <mat-panel-description>
+          {{ trialDescription }}
+          <mat-icon
+            [class.favorite-icon]="isFavorite === true"
+            (click)="updateFavorite(); $event.stopPropagation()"
+            >stars</mat-icon
+          >
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      {{ trialDetails }}
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

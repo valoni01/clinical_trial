@@ -1,12 +1,20 @@
-.example-action-buttons {
-  padding-bottom: 20px;
-}
 
-.example-headers-align .mat-expansion-panel-header-description {
+.clinical-list{
+  margin-bottom: 10px;
+}
+.clinical-list__items .mat-expansion-panel-header-description {
   justify-content: space-between;
   align-items: center;
 }
 
-.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+.clinical-list__items .mat-mdc-form-field + .mat-mdc-form-field {
   margin-left: 8px;
 }
+
+.favorite-icon{
+    color: green;
+}
+
+
+
+

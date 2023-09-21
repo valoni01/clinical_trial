@@ -3,6 +3,7 @@ export interface ClinicalTrialModel {
   briefTitle: string;
   officialTitle: string;
   acronym: string;
+  isFavorite?: boolean;
 }
 
 export interface AppClinicalTrialState {

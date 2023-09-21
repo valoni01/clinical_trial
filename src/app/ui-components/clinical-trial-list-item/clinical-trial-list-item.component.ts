@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import { ClinicalTrialModel } from 'src/app/clinical-trial.model';
+import { ClinicalTrialModel } from 'src/app/services/clinical-trial.model';
 
 @Component({
   selector: 'app-clinical-trial-list-item',
@@ -26,6 +26,7 @@ export class ClinicalTrialListItemComponent {
   @Input() public trialDescription = 'random';
   @Input() public trialDetails = 'more description';
   @Input() public listState: 'favorite' | 'default' = 'default';
+  @Input() public isFavorite: boolean | undefined = false;
 
   @Output() public onFavoriteUpdate: EventEmitter<null> = new EventEmitter();
 
