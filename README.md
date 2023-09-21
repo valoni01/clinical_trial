@@ -2,6 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
+## Initial plan for development 
+- Set app tooling
+  - setup linting rules
+  - setup pre-commit hook
+  - setup cypress for component testing
+  - setup storybook for the ui components
+  - setup tailwind or create a style structure for reusability
+  - create deployment environment
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
