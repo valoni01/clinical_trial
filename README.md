@@ -10,6 +10,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
   - setup storybook for the ui components
   - setup tailwind or create a style structure for reusability
   - create deployment environment
+ 
+  ## Run application (recent angular version API's used)
+- clone repo
+- npm install
+- ng serve
 
 ## Development server
 
